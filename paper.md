@@ -10,7 +10,7 @@ Date: 2016-11-8
 
 _Jonathan Coe \<jbcoe@me.com\>_
 
-_Walter Brown \<webrown@gmail.com\>_
+_Walter Brown \<webrown.cpp@gmail.com\>_
 
 ## TL;DR
 
