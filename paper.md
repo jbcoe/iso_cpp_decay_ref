@@ -173,8 +173,8 @@ double y = 0.0;
 auto t1 = std::tuple(ref(x), y);
 // t1 is std::tuple<int&, double>;
 
-auto t2 = std::tuple<int&,double>(x, y);
-// t2 is std::tuple<int&, double>;
+auto t2 = std::tuple<std::reference_wrapper<int>, double>(x, y);
+// t2 is std::tuple<std::reference_wrapper<int>, double>;
 ```
 
 User-defined types can make full use of template deduction and reference
