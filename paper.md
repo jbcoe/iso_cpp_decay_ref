@@ -178,8 +178,8 @@ auto t2 = std::tuple<std::reference_wrapper<int>, double>(x, y);
 ```
 
 User-defined types can make full use of template deduction and reference
-wrappers without any load on the user.  reference_wrapper is an
-'expert-friendly' feature, this proposal ensures that users user-defined class
+wrappers without any load on the user.  `reference_wrapper` is an
+'expert-friendly' feature, this proposal ensures that user-defined class
 templates will get its benefits for free.
 
 ## Acknowledgements
