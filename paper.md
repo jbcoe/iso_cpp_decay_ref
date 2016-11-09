@@ -29,20 +29,23 @@ template<typename T, typename T1, typename T2>
 boost::shared_ptr<T> make_shared(const T1& t1, const T2& t2);
 ```
 
-To pass a reference to such a function, one needed to use
-`boost::reference_wrapper` and the helper functions `boost::ref` and
+To pass a reference as an argument to such a function, one needed to use
+`boost::reference_wrapper`, typically via its helper functions `boost::ref` and
 `boost::cref`.
 (`boost::reference_wrapper` is a copyable type that is implicitly
 deducable to a reference.)
 
-C++11's introduction of forwarding references ++11 has rendered unnecessary
-the use of `reference_wrapper` when passing references to generic code.
-`reference_wrapper` was adopted in C++11 and is needed to pass references to
-factory functions for construction of `pair`s and `tuple`s.
+C++11's introduction of forwarding references
+enabled ``perfect forwarding'',
+thereby rendering unnecessary
+the use of `reference_wrapper` when passing references into generic code.
+`reference_wrapper` was nonetheless adopted in C++11,
+as it is still needed to pass references into
+factory functions that construct `pair`s and `tuple`s.
 
 `std::make_pair` and `std::make_tuple` do not use perfect forwarding: that
 would too readily result in a tuple of references, which is unlikely to be what
-a user wanted. Instead they use `std::decay` to strip (cv- and
+a user wanted. Instead these factories use `std::decay` to strip (cv- and
 reference) qualifiers from the supplied types and construct a `pair` or `tuple`
 of value types.
 
@@ -90,7 +93,7 @@ factory functions, with their domain-specific handling of reference wrappers, is
 muddied by having to specify deduction guides explictly in order to recover the
 (desirable) interaction with `reference wrapper`.
 
-We propose modifications to `std::decay`
+We instead propose modifications to `std::decay`
 so that implicit deduction guides  [temp.deduct.guide]
 will give 'correct' behaviour for `reference_wrapper`:
 unwrapping the wrapper.
@@ -167,10 +170,12 @@ auto make_tuple(Ts&& ...ts) -> std::tuple<std::decay_t<Ts>...>
 }
 ```
 
-Deduction guides can be specified using `std::decay` and users will not need
+Further,
+with the proposed change,
+deduction guides can be specified using `std::decay` and users will not need
 to write code to explicitly handle reference wrappers.
 
-If a user does want a `tuple` of reference wrappers then it can be explictly
+If a user does want a `tuple` of reference wrappers then it can still be explictly
 specified:
 
 ```
@@ -185,9 +190,11 @@ auto t2 = std::tuple<std::reference_wrapper<int>, double>(x, y);
 ```
 
 User-defined types can make full use of template deduction and reference
-wrappers without any load on the user.  `reference_wrapper` is an
-'expert-friendly' feature, this proposal ensures that user-defined class
-templates will get its benefits for free.
+wrappers without any load on the user.  Although `reference_wrapper` is
+often considered an
+'expert-friendly' feature, this proposal's adoption would ensure
+that user-defined class
+templates will receive its benefits for free.
 
 ## Proposed wording
 
