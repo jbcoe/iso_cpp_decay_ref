@@ -167,9 +167,8 @@ auto make_tuple(Ts&& ...ts) -> std::tuple<std::decay_t<Ts>...>
 }
 ```
 
-Compiler-deduced template types can be specified to be deduced using
-`std::decay` and users will not need to write code to explicitly handle
-reference wrappers.
+Deduction guides can be specified using `std::decay` and users will not need
+to write code to explicitly handle reference wrappers.
 
 If a user does want a `tuple` of reference wrappers then it can be explictly
 specified:
