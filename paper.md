@@ -170,10 +170,12 @@ auto make_tuple(Ts&& ...ts) -> std::tuple<std::decay_t<Ts>...>
 }
 ```
 
-Deduction guides can be specified using `std::decay` and users will not need
+Further,
+with the proposed change,
+deduction guides can be specified using `std::decay` and users will not need
 to write code to explicitly handle reference wrappers.
 
-If a user does want a `tuple` of reference wrappers then it can be explictly
+If a user does want a `tuple` of reference wrappers then it can still be explictly
 specified:
 
 ```
@@ -188,9 +190,11 @@ auto t2 = std::tuple<std::reference_wrapper<int>, double>(x, y);
 ```
 
 User-defined types can make full use of template deduction and reference
-wrappers without any load on the user.  `reference_wrapper` is an
-'expert-friendly' feature, this proposal ensures that user-defined class
-templates will get its benefits for free.
+wrappers without any load on the user.  Although `reference_wrapper` is
+often considered an
+'expert-friendly' feature, this proposal's adoption would ensure
+that user-defined class
+templates will receive its benefits for free.
 
 ## Proposed wording
 
