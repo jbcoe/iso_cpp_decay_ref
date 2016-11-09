@@ -82,7 +82,7 @@ and the compiler will deduce the type correctly.
 Given this new language feature,
 how should `reference_wrapper` interact with template
 deduction for class templates?
-A proposal [REF] has suggested adding
+A proposal [P00433R0] has suggested adding
 deduction guides to specify the behaviour explicitly.
 
 This seems unfortunate because the potential removal of `make_tuple` and similar
@@ -198,4 +198,5 @@ The authors thank Howard Hinnant for useful discussion.
 
 ## References
 
-[TODO]
+[P00433R0] Mike Spertus & Walter E. Brown, _"Toward a resolution of US7 and US14: Integrating template deduction for class templates into the standard library"_ 
+
