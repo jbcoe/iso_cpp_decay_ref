@@ -82,7 +82,7 @@ deduction for class templates?
 A proposal [REF] has suggested adding
 deduction guidelines to specify the behaviour explicitly.
 
-This seems unfortunate, because the potential removal of `make_tuple` and similar
+This seems unfortunate because the potential removal of `make_tuple` and similar
 factory functions, with their domain-specific handling of reference wrappers, is
 muddied by having to specify deduction guidelines explictly in order to recover the
 (desirable) interaction with `reference wrapper`.
