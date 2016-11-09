@@ -74,7 +74,7 @@ int x = 0;
 double y = 0.0;
 
 auto t = std::tuple(x, y);
-// t is std::tuple<int, double>;
+  // t is std::tuple<int, double>;
 ```
 
 and the compiler will deduce the type correctly.
