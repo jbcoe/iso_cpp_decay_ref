@@ -45,7 +45,7 @@ reference-qualifiers from the supplied types and construct a `pair` or `tuple`
 of value types. 
 
 If a user wants a `tuple` of references then `make_tuple` must be explictly
-passed a refence wrapper. 
+passed a reference wrapper. 
 
 ```
 int x = 0;
@@ -58,7 +58,7 @@ auto t2 = std::make_tuple(std::ref(x), y);
 // t2 is std::tuple<int&, double>;
 ```
 
-This design works perfectly but requires special casing of `make_tuple` and
+This design works perfectly, but requires special casing of `make_tuple` and
 `make_pair` for reference wrappers.
 
 
@@ -76,22 +76,24 @@ auto t = std::tuple(x, y);
 
 and the compiler will deduce the type correctly. 
 
-There is discussion about how `reference_wrapper` should interact with template
-deduction for class templates and a proposal [REF] has suggested adding
-deduction guidelines to explicitly specify the behaviour.
+Given this new language feature,
+how should `reference_wrapper` interact with template
+deduction for class templates?
+A proposal [REF] has suggested adding
+deduction guidelines to specify the behaviour explicitly.
 
-This seems unfortuante as the potential removal of `make_tuple` and similar
-factory functions, with their domain specific handling of reference wrappers, is
-muddied by having to explictly specify deduction guidelines to recover the
+This seems unfortunate, because the potential removal of `make_tuple` and similar
+factory functions, with their domain-specific handling of reference wrappers, is
+muddied by having to specify deduction guidelines explictly in order to recover the
 (desirable) interaction with `reference wrapper`.
 
-We propose modifications to `std::decay` so that implicit deduction guidelines
+We propose modifications to `std::decay` so that implicit deduction guidelines [REF]
 will give 'correct' behaviour for `reference_wrapper`: unwrapping the
 reference.
 
 ### Specialization of `std::decay` for `std::reference_wrapper`
 
-Reference implementation of `std::decay` with reference implementation.
+Expository implementation of `std::decay` with special handling for reference wrappers:
 
 ```
 template< class T >
@@ -183,7 +185,7 @@ wrappers without any load on the user.  `reference_wrapper` is an
 templates will get its benefits for free.
 
 ## Acknowledgements
-The authors would like to thank Howard Hinnant for useful discussion.
+The authors thank Howard Hinnant for useful discussion.
 
 ## References
 
