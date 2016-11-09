@@ -94,7 +94,7 @@ muddied by having to specify deduction guides explictly in order to recover the
 (desirable) interaction with `reference wrapper`.
 
 We instead propose modifications to `std::decay`
-so that implicit deduction guides  [temp.deduct.guide]
+so that deduction guides  [temp.deduct.guide]
 will give 'correct' behaviour for `reference_wrapper`:
 unwrapping the wrapper.
 
