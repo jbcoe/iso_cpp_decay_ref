@@ -198,6 +198,9 @@ templates will receive its benefits for free.
 
 ## Proposed wording
 
+Amend Table 46's entry for the `decay` trait
+as shown:
+
 Comments:
 Let `U` be `remove_reference_t<T>`
 <font color="green"> and let `V` be `remove_cv_t<U>`</font>.
