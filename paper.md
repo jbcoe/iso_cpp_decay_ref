@@ -158,7 +158,15 @@ struct decay<const std::reference_wrapper<T>&&> {
 };
 ```
 
-## Impact
+Although not shown above,
+it should be clear that
+the remaining cv-qualified `reference_wrapper` types
+are intended to be handled
+in a manner analogous
+to that shown above
+for a `const reference_wrapper`.
+
+## Primary impact
 
 Specializing `decay` for `reference_wrapper` makes writing factory functions easy:
 
@@ -196,7 +204,7 @@ often considered an
 that user-defined class
 templates will receive its benefits for free.
 
-## Proposed wording
+## Proposed wording I
 
 Amend Table 46's entry for the `decay` trait
 as shown:
