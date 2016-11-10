@@ -204,7 +204,7 @@ often considered an
 that user-defined class
 templates will receive its benefits for free.
 
-## Proposed wording I
+## Proposed wording for `decay` trait
 
 Amend Table 46's entry for the `decay` trait
 as shown:
@@ -233,6 +233,25 @@ from class types
 in order to more closely model
 by-value argument passing.
 —end note]
+
+## Proposed wording to apply revised `decay` trait
+
+We now wish to take advantage
+of the above improvement
+to `std::decay`.
+
+Amend [pairs.spec]/9 as shown:
+
+Returns:
+`pair<V1, V2>(std::forward<T1>(x), std::forward<T2>(y));`
+where `V1` and `V2`
+~~are determined as follows:
+Let `Ui` be `decay_t<Ti>` for each `Ti`.
+~~Then each `Vi` is `X&`
+if `Ui` equals `reference_wrapper<X>`,
+otherwise `Vi` is `Ui`~~
+<font color="green">denote `decay_t<T1>` and `decay_t<T2>`,
+respectively</font>.
 
 
 ## Acknowledgements
