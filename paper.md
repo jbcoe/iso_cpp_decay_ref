@@ -232,5 +232,7 @@ The authors thank Howard Hinnant for useful discussion.
 
 ## References
 
-[P00433R0] Mike Spertus & Walter E. Brown, _"Toward a resolution of US7 and US14: Integrating template deduction for class templates into the standard library"_ 
-
+[P00433R0] Mike Spertus & Walter E. Brown,
+_"Toward a resolution of US7 and US14:
+Integrating template deduction for class templates into the standard library"_,
+2016-10-16.
