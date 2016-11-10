@@ -198,12 +198,41 @@ templates will receive its benefits for free.
 
 ## Proposed wording
 
-[TODO]
+Amend Table 46's entry for the `decay` trait
+as shown:
+
+Comments:
+Let `U` be `remove_reference_t<T>`
+<font color="green"> and let `V` be `remove_cv_t<U>`</font>.
+If `is_array_v<U>` is `true`,
+the member typedef `type`
+shall equal `remove_extent_t<U>*`.
+If `is_function_v<U>` is true,
+the member typedef `type`
+shall equal `add_pointer_t<U>`.
+<font color="green">If `V` is `reference_wrapper<X>`
+for some type `X`,
+the member typedef `type`
+shall equal `V&`.</font>
+Otherwise the member typedef type equals `remove_cv_t<U>`.
+[Note: This behavior is similar
+to the lvalue-to-rvalue (4.1),
+array-to-pointer (4.2),
+and function-to-pointer (4.3) conversions
+applied when an lvalue expression is used as an rvalue,
+but also strips cv-qualifiers
+from class types
+in order to more closely model
+by-value argument passing.
+—end note]
+
 
 ## Acknowledgements
 The authors thank Howard Hinnant for useful discussion.
 
 ## References
 
-[P00433R0] Mike Spertus & Walter E. Brown, _"Toward a resolution of US7 and US14: Integrating template deduction for class templates into the standard library"_ 
-
+[P00433R0] Mike Spertus & Walter E. Brown,
+_"Toward a resolution of US7 and US14:
+Integrating template deduction for class templates into the standard library"_,
+2016-10-16.
