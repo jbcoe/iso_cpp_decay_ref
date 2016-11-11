@@ -158,7 +158,15 @@ struct decay<const std::reference_wrapper<T>&&> {
 };
 ```
 
-## Impact
+Although not shown above,
+it should be clear that
+the remaining cv-qualified `reference_wrapper` types
+are intended to be handled
+in a manner analogous
+to that shown above
+for a `const reference_wrapper`.
+
+## Primary impact
 
 Specializing `decay` for `reference_wrapper` makes writing factory functions easy:
 
@@ -196,7 +204,7 @@ often considered an
 that user-defined class
 templates will receive its benefits for free.
 
-## Proposed wording
+## Proposed wording for `decay` trait
 
 Amend Table 46's entry for the `decay` trait
 as shown:
@@ -225,6 +233,33 @@ from class types
 in order to more closely model
 by-value argument passing.
 —end note]
+
+
+## Proposed wording to apply revised `decay` trait
+
+We now wish to take advantage
+of the above improvement
+to `std::decay`.
+
+Amend [pairs.spec]/9 as shown below:
+
+Returns:
+`pair<V1, V2>(std::forward<T1>(x), std::forward<T2>(y));`
+where `V1` and `V2`
+~~are determined as follows:
+Let `Ui` be `decay_t<Ti>` for each `Ti`.
+<font color=red>~~Then each `Vi` is `X&`
+if `Ui` equals `reference_wrapper<X>`,
+otherwise `Vi` is `Ui`~~</font>
+<font color="green">denote `decay_t<T1>` and `decay_t<T2>`,
+respectively</font>.
+
+In [tuple.creation],
+remove paragraphs 1, 2, and 3,
+inserting the following (single) paragraph
+in their place:
+
+Returns: `tuple<decay_t<Types>...>(std::forward<Types>(t)...)`.
 
 
 ## Acknowledgements
